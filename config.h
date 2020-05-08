@@ -1,6 +1,10 @@
 /* See LICENSE file for copyright and license details. */
-
+// hardware multimedia keys
+#include <X11/XF86keysym.h>
 /* appearance */
+static const char *mutecmd[] = { "amixer", "-q", "set", "Master", "toggle", NULL };
+static const char *volupcmd[] = { "amixer", "-q", "set", "Master", "5%+", "unmute", NULL };
+static const char *voldowncmd[] = { "amixer", "-q", "set", "Master", "5%-", "unmute", NULL };
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -94,6 +98,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+{ 0, XF86XK_AudioMute, spawn, {.v = mutecmd } },
+{ 0, XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
+{ 0, XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
+
 };
 
 /* button definitions */
